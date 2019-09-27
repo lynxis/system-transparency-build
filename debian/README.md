@@ -1,15 +1,25 @@
-# create a reproducible initramfs
+# reproducible build a debian image as initramfs
 
-Build a debian based initramfs to run as whole image.
+Reproducible build a debian based initramfs to run a whole image.
 Usually an initramfs is only a intermediate phase when booting a linux.
-This initramfs contains a fully working image. The idea is to load this
-initramfs as one image.
+This initramfs contains a fully working image.
 
 ## How to build?
 
 The initramfs is build using [debos](https://github.com/go-debos/debos).
+The build process requires **root** privileges, because uses mount and debootstrap.
+
+Install the required packages:
 
 * `apt install fakeroot debos`
+
+Start the build process by
+
+* `./build.sh`
+
+##  Docker builds
+
+Docker is not supported (yet). Even privileges container fail to build.
 
 # TODO
 
