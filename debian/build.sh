@@ -20,7 +20,6 @@ source_date_version() {
 }
 
 source_date_git() {
-	[ -e .git ] || return 1
 	SOURCE_DATE_EPOCH="$(git log -1 --format=format:%ct)"
 	[ -n "$SOURCE_DATE_EPOCH" ]
 }
