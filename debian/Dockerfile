@@ -17,3 +17,6 @@ RUN apt-get -qq update && \
 		gzip \
 		bzip2 \
 		git
+
+ENTRYPOINT /system-transparency/debian/build.sh
+# docker run --cap-add=SYS_ADMIN --privileged -it -v $(pwd)/../:/system-transparency/ debos
