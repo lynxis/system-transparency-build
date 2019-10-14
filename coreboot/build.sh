@@ -34,6 +34,7 @@ bash util/crossgcc/buildgcc -j "$(nproc)" -P IASL
 bash util/xcompile/xcompile > .xcompile
 
 cp "$TOP/coreboot_config" .config
+cp "$TOP/linux_config" linux_config
 make -j "$CPUS"
 
 # used by docker build
