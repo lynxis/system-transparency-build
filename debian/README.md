@@ -17,9 +17,14 @@ Start the build process by
 
 * `./build.sh`
 
-##  Docker builds
+## Docker builds
 
 Docker is not supported (yet). Even privileges container fail to build.
+
+## lxc builds
+
+It is possible to build the image in a lxc container. Lxc container use similiar kernel subsystems to create a container as Docker/podman.
+Please see [lxc](./docs/lxc.md) for further instruction how to setup a lxc container on debian.
 
 # TODO
 
