@@ -10,6 +10,7 @@ mkdir output
 chmod 777 output
 docker run -e COREBOOT_COMMIT=4.10 -v $(pwd):/home/coreboot/repro-coreboot:ro repro-coreboot:$(git describe --always) /home/coreboot/repro-coreboot/build.sh
 ```
+
 ## direct build on a system
 
 To reduce build path dependency, the build.sh expects to build coreboot under **/tmp/coreboot/**.
