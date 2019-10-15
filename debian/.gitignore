@@ -3,3 +3,4 @@ artifacts
 *.swo
 .debos*
 debian-buster-*
+out/

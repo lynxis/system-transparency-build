@@ -42,6 +42,7 @@ build_debian_image() {
 		"--environ-var=LC_ALL:$LC_ALL" \
 		"--environ-var=LANG:$LANG" \
 		"--environ-var=TZ:$TZ" \
+		--artifactdir="$TOP/out/" \
 		./debos.yaml
 }
 
@@ -52,6 +53,7 @@ if [ -z "$SOURCE_DATE_EPOCH" ] ; then
 	exit 1
 fi
 export SOURCE_DATE_EPOCH=$SOURCE_DATE_EPOCH
+mkdir -p "$TOP/out"
 
 document_build_info
 build_debian_image
