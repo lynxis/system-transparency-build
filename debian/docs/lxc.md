@@ -54,7 +54,7 @@ lxc-create --name builder -t download -- -d debian -a amd64 --release buster
 lxc-start --name builder
 # let dhcp work
 sleep 5
-lxc-attach --name builder -- sh -c 'apt-get update && apt-get install -y --no-install-recommends debos git ca-certificates'
+lxc-attach --name builder -- sh -c 'apt-get update && apt-get install -y --no-install-recommends debos git ca-certificates cpio bzip2'
 lxc-attach --name builder -- sh -c 'cd /root && git clone https://github.com/system-transparency/build'
 lxc-attach --name builder -- sh -c 'cd /root/build/debian && ./build.sh'
 cp /var/lib/lxc/builder/rootfs/root/build/debian/out/* .
