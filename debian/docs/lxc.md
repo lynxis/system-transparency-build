@@ -57,5 +57,5 @@ sleep 5
 lxc-attach --name builder -- sh -c 'apt-get update && apt-get install -y --no-install-recommends debos git ca-certificates'
 lxc-attach --name builder -- sh -c 'cd /root && git clone https://github.com/system-transparency/build'
 lxc-attach --name builder -- sh -c 'cd /root/build/debian && ./build.sh'
-cp /var/lib/lxc/builder/rootfs/root/build/debian/debian-buster-amd64.cpio.gz .
+cp /var/lib/lxc/builder/rootfs/root/build/debian/out/* .
 ```
