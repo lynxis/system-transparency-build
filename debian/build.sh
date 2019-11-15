@@ -10,8 +10,11 @@ export TZ=UTC
 
 set -e -x
 
+IFS=""
+
 cd "$(dirname "$0")"
 export TOP=$(pwd)
+
 
 source_date_version() {
 	[ -f version.date ] || return 1
@@ -37,12 +40,24 @@ document_build_info() {
 }
 
 build_debian_image() {
+	method=""
+	if [ -e /.dockerenv ] ; then
+		if ! debos --help 2>&1 |grep -q -- --chroot ; then
+			echo "Your debos does not support --chroot !"
+			echo "Please use a newer debos version or the debos from https://github.com/system-transparency/debos"
+			exit 1
+		fi
+
+		method="--chroot"
+	fi
+
 	debos \
 		"--environ-var=SOURCE_DATE_EPOCH:$SOURCE_DATE_EPOCH" \
 		"--environ-var=LC_ALL:$LC_ALL" \
 		"--environ-var=LANG:$LANG" \
 		"--environ-var=TZ:$TZ" \
 		--artifactdir="$TOP/out/" \
+		$method \
 		./debos.yaml
 }
 
