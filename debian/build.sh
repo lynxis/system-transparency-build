@@ -41,6 +41,7 @@ document_build_info() {
 
 build_debian_image() {
 	method=""
+	fakemachine=""
 	if [ -e /.dockerenv ] ; then
 		if ! debos --help 2>&1 |grep -q -- --chroot ; then
 			echo "Your debos does not support --chroot !"
@@ -51,6 +52,10 @@ build_debian_image() {
 		method="--chroot"
 	fi
 
+	if debos --help 2>&1 |grep -q -- --disable-fakemachine ; then
+		fakemachine="--disable-fakemachine"
+	fi
+
 	debos \
 		"--environ-var=SOURCE_DATE_EPOCH:$SOURCE_DATE_EPOCH" \
 		"--environ-var=LC_ALL:$LC_ALL" \
@@ -58,6 +63,7 @@ build_debian_image() {
 		"--environ-var=TZ:$TZ" \
 		--artifactdir="$TOP/out/" \
 		$method \
+		$fakemachine \
 		./debos.yaml
 }
 
