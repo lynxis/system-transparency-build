@@ -32,5 +32,11 @@ RUN git remote add stdebos https://github.com/lynxis/debos && \
     git fetch stdebos && git checkout stdebos/docker-chroot
 RUN go install github.com/go-debos/debos/cmd/debos && cp ${GOPATH}/bin/debos /usr/local/bin/debos
 
+# patch debootstrap to support docker builds
+COPY debootstrap-buster.patch /tmp/debootstrap-buster.patch
+WORKDIR /usr/share/debootstrap/
+RUN cat /tmp/debootstrap-buster.patch | patch -p1
+
+WORKDIR /
 ENTRYPOINT /system-transparency/debian/build.sh
 # docker run --cap-add=SYS_ADMIN --privileged -it -v $(pwd)/../:/system-transparency/ debos
